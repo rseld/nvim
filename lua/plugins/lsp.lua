@@ -3,6 +3,7 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
       'saghen/blink.cmp',
+      { 'j-hui/fidget.nvim', opts = {}, },
       {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -16,7 +17,15 @@ return {
 
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      require('lspconfig').lua_ls.setup { capabilities = capabilities }
+
+      vim.lsp.config['lua_ls'] = {
+        capabilities = capabilities
+      }
+      vim.lsp.enable('lua_ls')
+
+      --vim.lsp.config['gopls'] = {}
+      vim.lsp.enable('gopls')
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('my.lsp', {}),
         callback = function(args)
