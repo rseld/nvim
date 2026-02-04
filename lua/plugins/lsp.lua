@@ -1,29 +1,47 @@
 return {
+
   {
     'neovim/nvim-lspconfig',
+
     dependencies = {
-      'saghen/blink.cmp',
       { 'j-hui/fidget.nvim', opts = {}, },
-      {
-        "folke/lazydev.nvim",
-        ft = "lua",
-        opts = {
-          library = {
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-          },
-        },
-      },
     },
 
     config = function()
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      vim.lsp.config('lua_ls', {
+        on_init = function(client)
+          if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if
+                path ~= vim.fn.stdpath('config')
+                and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+            then
+              return
+            end
+          end
 
-      vim.lsp.config['lua_ls'] = {
-        capabilities = capabilities
-      }
+          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+              version = 'LuaJIT',
+              path = {
+                'lua/?.lua',
+                'lua/?/init.lua',
+              },
+            },
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME,
+              },
+            },
+          })
+        end,
+        settings = {
+          Lua = {},
+        },
+      })
+
       vim.lsp.enable('lua_ls')
-
-      --vim.lsp.config['gopls'] = {}
       vim.lsp.enable('gopls')
 
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -44,32 +62,5 @@ return {
         end,
       })
     end,
-
-    vim.diagnostic.config {
-      severity_sort = true,
-      float = { border = 'rounded', source = 'if_many' },
-      underline = { severity = vim.diagnostic.severity.ERROR },
-      signs = vim.g.have_nerd_font and {
-        text = {
-          [vim.diagnostic.severity.ERROR] = '󰅚 ',
-          [vim.diagnostic.severity.WARN] = '󰀪 ',
-          [vim.diagnostic.severity.INFO] = '󰋽 ',
-          [vim.diagnostic.severity.HINT] = '󰌶 ',
-        },
-      } or {},
-      virtual_text = {
-        source = 'if_many',
-        spacing = 2,
-        format = function(diagnostic)
-          local diagnostic_message = {
-            [vim.diagnostic.severity.ERROR] = diagnostic.message,
-            -- [vim.diagnostic.severity.WARN] = diagnostic.message,
-            -- [vim.diagnostic.severity.INFO] = diagnostic.message,
-            -- [vim.diagnostic.severity.HINT] = diagnostic.message,
-          }
-          return diagnostic_message[diagnostic.severity]
-        end,
-      },
-    }
   }
 }

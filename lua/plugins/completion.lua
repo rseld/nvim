@@ -2,9 +2,13 @@ return {
   {
     'saghen/blink.cmp',
     version = '1.*',
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = { 'rafamadriz/friendly-snippets' },
     opts = {
-      keymap = { preset = 'default' },
+      keymap = {
+        preset = 'default',
+        ['<Up>'] = false,
+        ['<Down>'] = false,
+      },
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono'
@@ -20,4 +24,5 @@ return {
       download = false,
     },
   }
+
 }
