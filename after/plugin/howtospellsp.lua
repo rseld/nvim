@@ -1,16 +1,6 @@
-local client = vim.lsp.start({
-  name = "howtospellsp",
-  cmd = { "/home/reece/Projects/spellchecker/main" },
-
+vim.lsp.config('howtospellsp', {
+  cmd = { '/home/reece/Projects/spellchecker/main' },
+  filetypes = { 'text' }
 })
-if not client then
-  vim.notify("No client")
-  return
-end
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "txt",
-  callback = function()
-    vim.lsp.buf_attach_client(0, client)
-  end
-})
+vim.lsp.enable('howtospellsp')
