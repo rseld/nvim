@@ -1,4 +1,4 @@
-vim.keymap.set({ "n", "t" }, "<esc><esc>", "<c-\\><c-n>")
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 
 local state = {
   term = {
@@ -28,7 +28,6 @@ local function create_term_window(opts)
     row = row,
     col = col,
     style = "minimal",
-    border = "single",
   }
 
   local win = vim.api.nvim_open_win(buf, true, win_config)
@@ -47,4 +46,4 @@ local toggle_terminal = function()
 end
 
 vim.api.nvim_create_user_command("NVterm", toggle_terminal, {})
-vim.keymap.set({ "n", "t" }, "<leader>tm", toggle_terminal)
+vim.keymap.set("n", "<leader>tm", toggle_terminal)
