@@ -1,1 +1,2 @@
-after/**
+after/plugin/**
+lua/plugins/local.lua

@@ -8,6 +8,12 @@ return {
         defaults = {
           border = false,
         },
+        pickers = {
+          find_files = {
+            hidden = false,
+            no_ignore = true,
+          }
+        },
       }
 
       local builtin = require('telescope.builtin')
