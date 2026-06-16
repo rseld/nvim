@@ -1,5 +1,3 @@
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
-
 local state = {
   term = {
     win = -1,
@@ -45,5 +43,6 @@ local toggle_terminal = function()
   end
 end
 
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 vim.api.nvim_create_user_command("NVterm", toggle_terminal, {})
 vim.keymap.set("n", "<leader>tm", toggle_terminal)

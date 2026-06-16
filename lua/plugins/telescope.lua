@@ -6,7 +6,8 @@ return {
     config = function()
       require('telescope').setup {
         defaults = {
-          border = false,
+          border = true,
+          borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
         },
         pickers = {
           find_files = {
