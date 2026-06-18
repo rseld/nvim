@@ -5,25 +5,10 @@ return {
     lazy = false,
     build = ":TSUpdate",
 
-    --[[
-    init = function()
-      local parsers = {
-        "lua",
-        "c",
-        "vimdoc",
-        "vim",
-        "markdown",
-        "query",
+    config = function()
+      require("nvim-treesitter").setup {
+        install_dir = vim.fn.stdpath('data') .. '/lazy/nvim-treesitter/'
       }
-      vim.api.nvim_create_autocmd("User", {
-        group = group,
-        pattern = "VeryLazy",
-        once = true,
-        callback = function()
-          require("nvim-treesitter").install(parsers)
-        end,
-      })
     end
-    ]]--
   },
 }
