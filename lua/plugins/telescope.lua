@@ -24,6 +24,13 @@ return {
         builtin.find_files { cwd = vim.fn.stdpath('config')
         }
       end)
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('telescope-lsp-attach', { clear = true }),
+        callback = function(event)
+          local buf = event.buf
+          vim.keymap.set('n', '<leader>gd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [Definition]' })
+        end
+      })
     end
   }
 }
