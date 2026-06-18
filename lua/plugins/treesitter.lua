@@ -5,6 +5,7 @@ return {
     lazy = false,
     build = ":TSUpdate",
 
+    --[[
     init = function()
       local parsers = {
         "lua",
@@ -23,5 +24,6 @@ return {
         end,
       })
     end
+    ]]--
   },
 }
