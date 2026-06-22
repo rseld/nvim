@@ -24,4 +24,6 @@ vim.opt.scrolloff = 10
 vim.opt.signcolumn = 'yes'
 vim.opt.colorcolumn = '120'
 
+vim.o.splitright = true
+vim.opt.undofile = true
 vim.opt.updatetime = 50

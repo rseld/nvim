@@ -7,3 +7,4 @@ vim.keymap.set("n", "<leader>cd", function()
     vim.print(vim.fn.fnameescape(dir))
   end
 end, { desc = "cd to current file or directory" })
+vim.keymap.set("n", "<leader>u", ":Undotree<CR>", { desc = "undo tree" })

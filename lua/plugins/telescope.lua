@@ -7,7 +7,6 @@ return {
       require('telescope').setup {
         defaults = {
           border = true,
-          borderchars = { " ", " ", " ", " ", " ", " ", " ", " " }
         },
         pickers = {
           find_files = {

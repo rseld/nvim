@@ -41,8 +41,17 @@ return {
           Lua = {},
         },
       })
+      vim.lsp.config('csharp-ls', {
+        cmd = { "csharp-ls" },
+        filetypes = { "cs" },
+        root_dir = function(bufnr, callback)
+          callback(vim.fs.root(bufnr, { ".sln", ".csproj", ".git" }))
+        end,
+      })
+
       vim.lsp.enable('lua_ls')
       vim.lsp.enable('gopls')
+      vim.lsp.enable('csharp-ls')
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('my.lsp', {}),
