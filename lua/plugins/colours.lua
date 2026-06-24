@@ -5,8 +5,11 @@ return {
     priority = 1000,
     config = function()
       require("tokyonight").setup({
-        style = "moon",
+        style = "night",
         transparent = true,
+        styles = {
+          floats = "transparent",
+        }
       })
       vim.cmd [[colorscheme tokyonight]]
     end
