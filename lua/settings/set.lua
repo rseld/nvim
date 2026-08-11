@@ -29,3 +29,6 @@ vim.opt.updatetime = 50
 
 vim.o.splitright = true
 vim.o.winborder = "single"
+
+vim.o.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
